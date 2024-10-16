@@ -7,5 +7,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         launch();
-    }
+
+        System.out.println("JMAJ branch testing");
+
+ }
 }
