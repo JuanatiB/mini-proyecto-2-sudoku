@@ -17,6 +17,7 @@ public class WelcomeController {
     @FXML
     void handlePlay(ActionEvent event) throws IOException {
         GameStage.getInstance().getGameController().setGame(game);
+
         WelcomeStage.deleteInstance();
     }
 
