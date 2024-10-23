@@ -3,6 +3,7 @@ package com.example.miniproyect2.controller;
 import com.example.miniproyect2.model.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
 
 import static com.example.miniproyect2.controller.ErrorDisplay.showError;
@@ -23,26 +24,24 @@ public class GameController {
 
     }
     private void onKeyTxtEntered(TextField txt, int row, int col) {
-        txt.setOnAction(event -> {
-            String input = txt.getText().trim(); // Obtener el texto del campo
 
-            if (input.isEmpty()) {
-                showError("Texto Vacio", "No has escrito nada!!");
-            } else {
-                try {
-                    int value = Integer.parseInt(input); // Convertir el texto a número
+        txt.setOnKeyReleased(event -> {
+            singleDigitTxt(txt);
+            String input = txt.getText().trim();
 
-                    if (value < 1 || value > 6) {
-                        showError("Error", "Solo puedes escribir números del 1 al 6!!");
-                    } else {
-                        textfields[row][col].setText(input); // Guardar el valor si es válido
-                        System.out.println("Valor ingresado: " + input);
-                    }
-                } catch (NumberFormatException e) {
-                    showError("Error de Formato", "Debes ingresar un número válido!!");
+            try {
+                int value = Integer.parseInt(input); //  convertir a número
+
+                if (value < 1 || value > 6) {
+                    showError("Error", "Solo puedes escribir números del 1 al 6!!");
+                    txt.setText(null);
+                } else {
+                    textfields[row][col].setText(input); // Guarda si es válido
+                    System.out.println("Valor ingresado: " + input);
                 }
+            } catch (NumberFormatException e) {
+                showError("Error de Formato", "Debes ingresar un número válido!!");
             }
-
         });
     }
     /*private void onKeyTxtEntered (TextField txt,int row, int col){
@@ -71,5 +70,13 @@ public class GameController {
                 onKeyTxtEntered(textfields[r][c],r,c);
             }
         }
+    }
+    private void singleDigitTxt(TextField txt) {
+        txt.setTextFormatter(new TextFormatter<String>(change -> {
+            if (change.getControlNewText().length() > 1) {
+                return null;
+            }
+            return change;
+        }));
     }
 }
