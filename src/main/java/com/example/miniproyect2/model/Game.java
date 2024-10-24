@@ -100,7 +100,7 @@ public class Game implements IGame {
 
             if (value != 0) {
                 if (seen.contains(value)) {
-                    System.out.println("Valor repetido en fila: " + value);
+                    System.out.println("Valor repetido en fila" + col + ": " + value);
                     return false;
                 }
                 seen.add(value);
@@ -120,6 +120,7 @@ public class Game implements IGame {
             for (int i = 1; i < blocks[index].size() - item; i++) {
                 if (Objects.equals(blocks[index].get(item), blocks[index].get(item + i))) {
                     System.out.println("Bloque " + index + " No es válido");
+                    System.out.println("Valor " + blocks[index].get(item) + "repetido");
                     return false;
                 }
             }
@@ -138,9 +139,4 @@ public class Game implements IGame {
         }
     }
 
-    public void showBlock(int index) {
-        for (int i = 0; i < blocks[index].size(); i++) {
-            System.out.print("\t" + blocks[index].get(i));
-        }
-    }
 }
