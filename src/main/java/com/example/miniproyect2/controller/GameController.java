@@ -26,24 +26,34 @@ public class GameController {
     private void onKeyTxtEntered(TextField txt, int row, int col) {
 
         txt.setOnKeyReleased(event -> {
-            singleDigitTxt(txt);
-            String input = txt.getText().trim();
+            singleDigitTxt(txt); // Verifica que solo haya un dígito
+            String input = txt.getText().trim(); // Obtener el texto actual del campo
+
+            if (input.isEmpty()) {
+                game.AddToBoard(row, col, 0);
+                textfields[row][col].setText("");
+                System.out.println("Campo vacío, se asignó 0 en el tablero.");
+
+                return;
+            }
 
             try {
-                int value = Integer.parseInt(input); //  convertir a número
+                int value = Integer.parseInt(input); // Convertir a número
 
                 if (value < 1 || value > 6) {
                     showError("Error", "Solo puedes escribir números del 1 al 6!!");
-                    txt.setText(null);
-
+                    txt.setText(null); // Borra el contenido si el número es inválido
                 } else {
-                    textfields[row][col].setText(input); // Guarda si es válido
-                    game.AddToBoard(row,col,Integer.parseInt(input));
+                    textfields[row][col].setText(input); // Guardar el valor en el TextField
+                    game.AddToBoard(row, col, value); // Agregar al tablero
                     System.out.println("Valor ingresado: " + input);
-                    txt.positionCaret(txt.getText().length());// Mover el cursor al final del texto después de presionar Enter
                 }
+
+                // Mover el cursor al final del texto
+                txt.positionCaret(txt.getText().length());
+
             } catch (NumberFormatException e) {
-                txt.setText(null);
+                txt.setText(null); // Limpia el campo si no es un número válido
                 showError("Error de Formato", "Debes ingresar un número válido!!");
             }
         });
