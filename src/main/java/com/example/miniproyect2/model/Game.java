@@ -71,7 +71,7 @@ public class Game implements IGame {
     }
 
     @Override
-    public boolean verifyColumn(int row) {
+    public boolean isColumnValid(int row) {
         System.out.println("accediendo metodo verifyColumn");
         Set<Integer> seen = new HashSet<>();
 
@@ -91,7 +91,7 @@ public class Game implements IGame {
 
 
     @Override
-    public boolean verifyRow(int col) {
+    public boolean isRowValid(int col) {
         System.out.println("accediendo metodo verifyRow");
         HashSet<Integer> seen = new HashSet<>();
 
@@ -110,7 +110,7 @@ public class Game implements IGame {
     }
 
     @Override
-    public boolean verifyBlock(int index) {
+    public boolean isBlockValid(int index) {
         System.out.println("Accediendo verifyBlock");
         for (int item = 0; item < 6; item++){
             System.out.print(blocks[index].get(item) + " ");
