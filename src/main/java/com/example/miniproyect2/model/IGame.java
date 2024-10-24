@@ -6,5 +6,5 @@ public interface IGame {
     boolean verifyRow(int index);
     boolean verifyColumn(int index);
     boolean verifyBlock(int index);
-
+    void showBoard();
 }

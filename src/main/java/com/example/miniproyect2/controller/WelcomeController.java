@@ -1,4 +1,5 @@
 package com.example.miniproyect2.controller;
+
 import com.example.miniproyect2.model.Game;
 import com.example.miniproyect2.view.GameStage;
 import com.example.miniproyect2.view.WelcomeStage;
