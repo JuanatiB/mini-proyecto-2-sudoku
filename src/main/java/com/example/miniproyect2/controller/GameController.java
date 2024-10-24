@@ -35,12 +35,15 @@ public class GameController {
                 if (value < 1 || value > 6) {
                     showError("Error", "Solo puedes escribir números del 1 al 6!!");
                     txt.setText(null);
+
                 } else {
                     textfields[row][col].setText(input); // Guarda si es válido
                     game.AddToBoard(row,col,Integer.parseInt(input));
                     System.out.println("Valor ingresado: " + input);
+                    txt.positionCaret(txt.getText().length());// Mover el cursor al final del texto después de presionar Enter
                 }
             } catch (NumberFormatException e) {
+                txt.setText(null);
                 showError("Error de Formato", "Debes ingresar un número válido!!");
             }
         });
