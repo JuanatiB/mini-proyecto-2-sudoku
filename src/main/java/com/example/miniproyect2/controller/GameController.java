@@ -37,6 +37,7 @@ public class GameController {
                     txt.setText(null);
                 } else {
                     textfields[row][col].setText(input); // Guarda si es válido
+                    game.AddToBoard(row,col,Integer.parseInt(input));
                     System.out.println("Valor ingresado: " + input);
                 }
             } catch (NumberFormatException e) {
@@ -44,24 +45,7 @@ public class GameController {
             }
         });
     }
-    /*private void onKeyTxtEntered (TextField txt,int row, int col){
-        txt.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if(Integer.parseInt(keyEvent.getText())>6 || Integer.parseInt(keyEvent.getText())<1){
-                    showError("Error","Solo puedes escribir numeros del 1 al 6!!");
-                }
-                else if(keyEvent.getText().isEmpty()){
-                    showError("Texto Vacio","No has escrito nada!!");
-                }
-                else {
-                    textfields[row][col].setText(txt.getText());
-                    System.out.println(keyEvent.getText().trim());
-                }
 
-            }
-        });
-    }*/
     public void createTextField(){
         for(int r=0; r<6; r++){
             for(int c=0; c<6; c++){
