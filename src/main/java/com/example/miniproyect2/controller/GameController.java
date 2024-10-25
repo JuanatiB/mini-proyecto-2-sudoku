@@ -63,6 +63,14 @@ public class GameController {
         for(int r=0; r<6; r++){
             for(int c=0; c<6; c++){
                 textfields[r][c] = new TextField();
+                textfields[r][c].setStyle("-fx-border-color: black; " +
+                        "-fx-border-width: 1; " +
+                        "-fx-alignment: center; " +
+                        "-fx-font-size: 18px; " +
+                        "-fx-min-width: 40; " +
+                        "-fx-min-height: 40;");
+                textfields[r][c].setPrefWidth(40);
+                textfields[r][c].setPrefHeight(40);
                 this.grid.add(textfields[r][c], r, c);
                 onKeyTxtEntered(textfields[r][c],r,c);
             }
