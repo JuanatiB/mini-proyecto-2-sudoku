@@ -1,10 +1,14 @@
 package com.example.miniproyect2.controller;
 
 import com.example.miniproyect2.model.Game;
+import com.example.miniproyect2.view.WelcomeStage;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
+import com.example.miniproyect2.view.GameStage;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import static com.example.miniproyect2.controller.ErrorDisplay.showError;
 
@@ -76,6 +80,11 @@ public class GameController {
             }
         }
     }
+    @FXML
+    void handleBack(javafx.event.ActionEvent actionEvent) throws IOException {
+        WelcomeStage.getInstance();
+        GameStage.deleteInstance();
+    }
     private void singleDigitTxt(TextField txt) {
         txt.setTextFormatter(new TextFormatter<String>(change -> {
             if (change.getControlNewText().length() > 1) {
@@ -85,3 +94,4 @@ public class GameController {
         }));
     }
 }
+
