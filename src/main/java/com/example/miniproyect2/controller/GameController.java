@@ -33,7 +33,6 @@ public class GameController {
                 game.AddToBoard(row, col, 0);
                 textfields[row][col].setText("");
                 System.out.println("Campo vacío, se asignó 0 en el tablero.");
-                game.showBoard();
 
                 return;
             }
@@ -48,10 +47,6 @@ public class GameController {
                     textfields[row][col].setText(input); // Guardar el valor en el TextField
                     game.AddToBoard(row, col, value); // Agregar al tablero
                     System.out.println("Valor ingresado: " + input);
-                    game.showBoard();
-                    game.fillBlocks();
-
-                    if (game.won()) System.out.println("Ganó");
                 }
 
                 // Mover el cursor al final del texto
@@ -68,6 +63,14 @@ public class GameController {
         for(int r=0; r<6; r++){
             for(int c=0; c<6; c++){
                 textfields[r][c] = new TextField();
+                textfields[r][c].setStyle("-fx-border-color: black; " +
+                        "-fx-border-width: 1; " +
+                        "-fx-alignment: center; " +
+                        "-fx-font-size: 18px; " +
+                        "-fx-min-width: 40; " +
+                        "-fx-min-height: 40;");
+                textfields[r][c].setPrefWidth(40);
+                textfields[r][c].setPrefHeight(40);
                 this.grid.add(textfields[r][c], r, c);
                 onKeyTxtEntered(textfields[r][c],r,c);
             }
