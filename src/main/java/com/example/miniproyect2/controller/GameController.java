@@ -13,7 +13,7 @@ import java.io.IOException;
 import static com.example.miniproyect2.controller.ErrorDisplay.showError;
 
 public class GameController {
-    private Game game;
+    private Game game = new Game();
     @FXML
     private GridPane grid;
     private TextField[][] textfields = new TextField[6][6];
@@ -31,18 +31,19 @@ public class GameController {
 
         txt.setOnKeyReleased(event -> {
             singleDigitTxt(txt); // Verifica que solo haya un dígito
-            String input = txt.getText().trim(); // Obtener el texto actual del campo
+            String input = txt.getText(); // Obtener el texto actual del campo
 
-            if (input.isEmpty()) {
+            if (txt.getText() == null || txt.getText().isEmpty()) {
                 game.AddToBoard(row, col, 0);
                 textfields[row][col].setText("");
                 System.out.println("Campo vacío, se asignó 0 en el tablero.");
+                game.showBoard();
 
                 return;
             }
 
             try {
-                int value = Integer.parseInt(input); // Convertir a número
+                int value = (txt.getText() == null) ? 0 : Integer.parseInt(input); // Convertir a número
 
                 if (value < 1 || value > 6) {
                     showError("Error", "Solo puedes escribir números del 1 al 6!!");
@@ -51,10 +52,12 @@ public class GameController {
                     textfields[row][col].setText(input); // Guardar el valor en el TextField
                     game.AddToBoard(row, col, value); // Agregar al tablero
                     System.out.println("Valor ingresado: " + input);
+                    game.showBoard();
+                    if (game.won()) System.out.println("You won!");
                 }
 
                 // Mover el cursor al final del texto
-                txt.positionCaret(txt.getText().length());
+//                txt.positionCaret(txt.getText().length());
 
             } catch (NumberFormatException e) {
                 txt.setText(null); // Limpia el campo si no es un número válido
@@ -77,6 +80,17 @@ public class GameController {
                 textfields[r][c].setPrefHeight(40);
                 this.grid.add(textfields[r][c], r, c);
                 onKeyTxtEntered(textfields[r][c],r,c);
+                if (game.getBoard()[r][c] != 0) {
+                    textfields[r][c].setText(String.valueOf(game.getBoard()[r][c]));
+                    textfields[r][c].setEditable(false);
+                    textfields[r][c].setStyle("-fx-font-weight: bold;" +
+                            "-fx-border-color: black; " +
+                            "-fx-border-width: 1; " +
+                            "-fx-alignment: center; " +
+                            "-fx-font-size: 18px; " +
+                            "-fx-min-width: 40; " +
+                            "-fx-min-height: 40;");
+                }
             }
         }
     }
