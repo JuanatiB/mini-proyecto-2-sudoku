@@ -1,4 +1,5 @@
 package com.example.miniproyect2.controller;
+
 import com.example.miniproyect2.model.Game;
 import com.example.miniproyect2.view.GameStage;
 import com.example.miniproyect2.view.WelcomeStage;
@@ -17,6 +18,7 @@ public class WelcomeController {
     @FXML
     void handlePlay(ActionEvent event) throws IOException {
         GameStage.getInstance().getGameController().setGame(game);
+
         WelcomeStage.deleteInstance();
     }
 
